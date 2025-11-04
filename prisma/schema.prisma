@@ -48,6 +48,8 @@ model Team {
   players       Player[]
   competition   Competition? @relation(fields: [competitionId], references: [id])
   competitionId Int?
+  homeMatches   Match[]        @relation("HomeTeamMatches")
+  awayMatches   Match[]        @relation("AwayTeamMatches")
 }
 
 model Competition {
@@ -56,4 +58,16 @@ model Competition {
   shortName     String
   countryIso    String
   teams         Team[]
+  matches       Match[]
+}
+
+model Match {
+  id            Int      @id @default(autoincrement())
+  date          DateTime
+  homeTeam      Team @relation("HomeTeamMatches", fields: [homeTeamId], references: [id])
+  homeTeamId    Int
+  awayTeam      Team @relation("AwayTeamMatches", fields: [awayTeamId], references: [id])
+  awayTeamId    Int
+  competition   Competition @relation(fields: [competitionId], references: [id])
+  competitionId Int
 }

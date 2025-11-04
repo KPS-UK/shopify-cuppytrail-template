@@ -19,7 +19,10 @@ export default function App() {
     <AppProvider embedded apiKey={apiKey}>
       <s-app-nav>
         <s-link href="/app">Home</s-link>
-        <s-link href="/app/additional">Additional page</s-link>
+        <s-link href="/app/teams">Teams</s-link>
+        <s-link href="/app/players">Players</s-link>
+        <s-link href="/app/competitions">Competitions</s-link>
+        <s-link href="/app/matches">Matches</s-link>
       </s-app-nav>
       <Outlet />
     </AppProvider>
