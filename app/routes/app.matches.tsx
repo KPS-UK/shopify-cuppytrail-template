@@ -1,6 +1,8 @@
 import prisma from "app/db.server";
 import { useLoaderData } from "react-router";
 import { Match, Team } from "@prisma/client";
+import { matchProps } from "./api.matches";
+import FormModal from "app/components/modals/FormModal";
 
 // Define a type that includes the related team data
 type MatchesWithIncludes = Match & {
@@ -20,13 +22,9 @@ export const loader = async () => {
 export default function Matches() {
     const matches = useLoaderData<MatchesWithIncludes[]>();
 
-    const createMatch = () => {
-        //TODO
-    }
-
     return (
         <s-page heading="Matches">
-            <s-button slot="primary-action" onClick={createMatch}>
+            <s-button slot="primary-action" commandFor={`matchModal`}>
                 Create Match
             </s-button>
 
@@ -54,6 +52,7 @@ export default function Matches() {
                     </s-table-body>
                 </s-table>
             </s-section>
+            <FormModal title="Create Match" type="match" button="Save Match" attributes={matchProps} />
         </s-page>
     )
 }

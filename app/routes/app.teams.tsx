@@ -1,6 +1,8 @@
 import prisma from "app/db.server";
 import { useLoaderData } from "react-router";
 import { Competition, Team } from "@prisma/client";
+import FormModal from "app/components/modals/FormModal";
+import { teamProps } from "./api.teams";
 
 // Define a type that includes the related competition data
 type TeamWithIncludes = Team & {
@@ -19,13 +21,9 @@ export const loader = async () => {
 export default function Teams() {
     const teams = useLoaderData<TeamWithIncludes[]>();
 
-    const createTeam = () => {
-        //TODO
-    }
-
     return (
         <s-page heading="Teams">
-            <s-button slot="primary-action" onClick={createTeam}>
+            <s-button slot="primary-action" commandFor={`teamModal`}>
                 Create Team
             </s-button>
 
@@ -55,6 +53,7 @@ export default function Teams() {
                     </s-table-body>
                 </s-table>
             </s-section>
+            <FormModal title="Create Team" type="team" button="Save Team" attributes={teamProps} />
         </s-page>
     )
 }

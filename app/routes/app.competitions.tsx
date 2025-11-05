@@ -1,24 +1,22 @@
 import prisma from "app/db.server";
 import { useLoaderData } from "react-router";
 import { Competition } from "@prisma/client";
+import FormModal from "app/components/modals/FormModal";
+import { competitionProps } from "./api.competitions";
 
 // Loader function to fetch players with their team
 export const loader = async () => {
-  const matches = await prisma.competition.findMany();
-  return Response.json(matches || []);
+  const competitions = await prisma.competition.findMany();
+  return Response.json(competitions || []);
 };
 
 // React component to display the teams
 export default function Competitions() {
     const competitions = useLoaderData<Competition[]>();
 
-    const createCompetition = () => {
-        //TODO
-    }
-
     return (
         <s-page heading="Competitions">
-            <s-button slot="primary-action" onClick={createCompetition}>
+            <s-button slot="primary-action" commandFor={`competitionModal`}>
                 Create Competition
             </s-button>
 
@@ -46,6 +44,7 @@ export default function Competitions() {
                     </s-table-body>
                 </s-table>
             </s-section>
+            <FormModal title="Create Competition" type="competition" button="Save Competition" attributes={competitionProps} action="/api/competitions" />
         </s-page>
     )
 }

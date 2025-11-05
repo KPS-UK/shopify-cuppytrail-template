@@ -1,6 +1,8 @@
 import prisma from "app/db.server";
 import { useLoaderData } from "react-router";
 import { Player, Team } from "@prisma/client";
+import { playerProps } from "./api.players";
+import FormModal from "app/components/modals/FormModal";
 
 // Define a type that includes the related team data
 type PlayersWithIncludes = Player & {
@@ -19,13 +21,9 @@ export const loader = async () => {
 export default function Players() {
     const players = useLoaderData<PlayersWithIncludes[]>();
 
-    const createPlayer = () => {
-        //TODO
-    }
-
     return (
         <s-page heading="Players">
-            <s-button slot="primary-action" onClick={createPlayer}>
+            <s-button slot="primary-action" commandFor={`playerModal`}>
                 Create Player
             </s-button>
 
@@ -54,6 +52,7 @@ export default function Players() {
                     </s-table-body>
                 </s-table>
             </s-section>
+            <FormModal title="Create Player" type="player" button="Save Player" attributes={playerProps} />
         </s-page>
     )
 }
