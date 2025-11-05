@@ -44,7 +44,7 @@ export default function Competitions() {
                     </s-table-body>
                 </s-table>
             </s-section>
-            <FormModal title="Create Competition" type="competition" button="Save Competition" attributes={competitionProps} action="/api/competitions" />
+            <FormModal title="Create Competition" type="competition" button="Save Competition" attributes={competitionProps} />
         </s-page>
     )
 }

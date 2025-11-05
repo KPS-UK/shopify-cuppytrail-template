@@ -1,7 +1,7 @@
 import prisma from "app/db.server";
 import { useLoaderData } from "react-router";
 import { Match, Team } from "@prisma/client";
-import { matchProps } from "./api.matches";
+import { matchProps } from "./api.matchs";
 import FormModal from "app/components/modals/FormModal";
 
 // Define a type that includes the related team data
